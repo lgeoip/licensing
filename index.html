@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lgeoip — Licensing</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230057fa' d='M12 22s-8-5.8-8-12a8 8 0 1 1 16 0c0 6.2-8 12-8 12z'/%3E%3Ccircle cx='12' cy='10' r='3' fill='%23fff'/%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat/800.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat/900.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope/800.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/700.css">
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --accent:#0057fa;
+  --accent-deep:#0039b8;
+  --accent-ink:#002a85;
+  --accent-soft:rgba(0,87,250,.07);
+  --accent-line:rgba(0,87,250,.16);
+  --ink:#0a1628;
+  --muted:#5c6b82;
+  --faint:#8b98ad;
+  --ok:#0a9d6c;
+  --bad:#e5484d;
+  --glass:rgba(255,255,255,.58);
+  --glass-strong:rgba(255,255,255,.78);
+  --radius-lg:24px;
+  --radius-md:18px;
+  --radius-sm:13px;
+  --shadow-lg:0 24px 60px -24px rgba(0,87,250,.22);
+  --shadow-sm:0 12px 30px -16px rgba(10,22,40,.16);
+  --fd:'Montserrat',sans-serif;
+  --fb:'Manrope',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:#ffffff;
+  color:var(--ink);
+  font-family:var(--fb);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:#fff}
+a{color:var(--accent);text-decoration:none}
+img,svg{display:block}
+section{position:relative;scroll-margin-top:110px}
+.container{width:min(1160px,92vw);margin:0 auto;position:relative;z-index:2}
+
+/* ============ AMBIENT ============ */
+.blob{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.blob.b1{width:620px;height:620px;top:-180px;left:-160px;background:radial-gradient(circle,rgba(214,232,255,.9) 0%,rgba(214,232,255,0) 70%);animation:drift1 26s ease-in-out infinite alternate}
+.blob.b2{width:540px;height:540px;top:22%;right:-200px;background:radial-gradient(circle,rgba(224,238,255,.95) 0%,rgba(224,238,255,0) 70%);animation:drift2 32s ease-in-out infinite alternate}
+.blob.b3{width:700px;height:700px;bottom:-260px;left:28%;background:radial-gradient(circle,rgba(233,242,255,.95) 0%,rgba(233,242,255,0) 70%);animation:drift3 38s ease-in-out infinite alternate}
+@keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(90px,70px) scale(1.12)}}
+@keyframes drift2{from{transform:translate(0,0) scale(1.05)}to{transform:translate(-110px,90px) scale(.94)}}
+@keyframes drift3{from{transform:translate(0,0) scale(1)}to{transform:translate(-120px,-90px) scale(1.1)}}
+.noise{
+  position:fixed;inset:0;z-index:120;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ============ GLASS / REVEAL ============ */
+.glass{
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--accent-line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+}
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ============ HEADER ============ */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .35s,box-shadow .35s,border-color .35s;border-bottom:1px solid transparent}
+.hdr.scrolled{
+  background:var(--glass-strong);
+  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+  border-bottom-color:var(--accent-line);
+  box-shadow:0 10px 34px -22px rgba(0,87,250,.35);
+}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{font-family:var(--fd);font-weight:800;font-size:26px;letter-spacing:-.02em;color:var(--accent);display:inline-flex;align-items:center;line-height:1}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:14px;font-weight:700;color:var(--ink);position:relative;padding:4px 0}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-2px;height:2px;width:100%;background:var(--accent);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.progress{position:absolute;left:0;bottom:-1px;height:2.5px;width:0;background:linear-gradient(90deg,#7ab3ff,var(--accent));z-index:101;border-radius:0 3px 3px 0}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--fb);font-weight:800;font-size:15px;
+  padding:13px 24px;border-radius:14px;cursor:pointer;border:none;
+  position:relative;overflow:hidden;transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s,background .28s,color .28s;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 12px 28px -10px rgba(0,87,250,.55)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 36px -10px rgba(0,87,250,.6);background:var(--accent-deep)}
+.btn-primary::after{content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .6s ease}
+.btn-primary:hover::after{left:130%}
+.btn-ghost{background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--accent-line);color:var(--ink)}
+.btn-ghost:hover{transform:translateY(-3px);border-color:var(--accent);color:var(--accent);box-shadow:var(--shadow-sm)}
+.btn-sm{padding:10px 18px;font-size:13.5px;border-radius:12px}
+.btn .b-ico{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ============ HERO ============ */
+.hero{padding:170px 0 70px}
+.hero .container{padding:0 clamp(14px,3.2vw,52px)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:60px;align-items:center}
+.hero h1{
+  font-family:var(--fd);font-weight:900;font-size:clamp(2.4rem,4.8vw,3.8rem);
+  line-height:1.06;letter-spacing:-.035em;margin-bottom:22px;
+}
+.hline{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.hline>span{display:block;transform:translateY(115%);animation:rise .95s cubic-bezier(.19,.8,.22,1) forwards}
+.hline:nth-child(2)>span{animation-delay:.14s}
+@keyframes rise{to{transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.ip-accent{color:var(--accent);display:inline-block}
+.hero-sub{
+  color:var(--muted);font-size:17px;font-weight:500;max-width:620px;margin-bottom:30px;
+  opacity:0;animation:fadeUp .8s .2s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.hero-sub b{color:var(--ink)}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .35s cubic-bezier(.2,.7,.2,1) forwards}
+
+/* ============ DOC LAYOUT ============ */
+.doc{padding:80px 0 60px}
+.doc-grid{display:grid;grid-template-columns:270px 1fr;gap:44px;align-items:start}
+
+/* TOC */
+.toc{position:sticky;top:104px;padding:24px}
+.toc h4{font-family:var(--fm);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);margin-bottom:16px}
+.toc a:not(.btn){
+  display:flex;gap:12px;align-items:baseline;padding:8.5px 12px;border-radius:10px;
+  font-size:13.5px;font-weight:700;color:var(--muted);
+  transition:background .25s,color .25s,transform .25s;
+  margin-bottom:2px;
+}
+.toc a:not(.btn):hover{color:var(--accent);transform:translateX(3px)}
+.toc a:not(.btn) .n{font-family:var(--fm);font-size:11px;color:var(--faint);font-weight:500;flex:none;transition:color .25s}
+.toc a:not(.btn).active{background:var(--accent);color:#fff;box-shadow:0 10px 24px -10px rgba(0,87,250,.55)}
+.toc a:not(.btn).active .n{color:rgba(255,255,255,.75)}
+
+/* ============ POLICY DOC ============ */
+.policy-doc{padding:0}
+.policy-doc h2{
+  font-family:var(--fd);font-weight:800;
+  font-size:clamp(1.22rem,2.1vw,1.5rem);
+  letter-spacing:-.015em;line-height:1.25;
+  display:flex;align-items:center;gap:14px;
+  margin:44px 0 16px;
+  scroll-margin-top:110px;
+}
+.policy-doc h2:first-of-type{margin-top:0}
+.policy-doc h2:not(:first-of-type){
+  padding-top:34px;
+  border-top:1px dashed rgba(0,87,250,.14);
+}
+.policy-doc .pol-num{
+  font-family:var(--fm);font-weight:700;font-size:13px;color:var(--accent);
+  background:var(--accent-soft);border:1px solid var(--accent-line);
+  padding:6px 11px;border-radius:10px;flex:none;line-height:1.1;
+}
+.policy-doc h3{font-family:var(--fd);font-weight:700;font-size:16px;margin:22px 0 10px}
+.policy-doc p{color:var(--muted);font-size:15px;font-weight:500;margin-bottom:13px}
+.policy-doc p:last-child{margin-bottom:0}
+.policy-doc p b{color:var(--ink)}
+.policy-doc p a{font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(0,87,250,.4)}
+.policy-doc .mono{font-family:var(--fm);font-size:13px;background:rgba(0,87,250,.06);border:1px solid var(--accent-line);padding:2px 8px;border-radius:7px;color:var(--ink);font-weight:500}
+
+.doc-list{list-style:none;margin:6px 0 16px}
+.doc-list li{
+  position:relative;padding:10px 14px 10px 34px;color:var(--muted);font-size:14.5px;font-weight:500;
+  border-radius:12px;margin-bottom:4px;
+}
+.doc-list li::before{
+  content:'✦';position:absolute;left:12px;top:10px;color:var(--accent);font-size:11px;
+}
+.doc-list li b{color:var(--ink)}
+
+/* check list */
+.check-list{list-style:none;margin:6px 0 16px}
+.check-list li{
+  position:relative;padding:11px 16px 11px 44px;color:var(--ink);font-size:14.5px;font-weight:600;
+  background:rgba(10,157,108,.05);border:1px solid rgba(10,157,108,.18);border-radius:12px;margin-bottom:8px;
+}
+.check-list li::before{
+  content:'';
+  position:absolute;left:14px;top:50%;
+  width:20px;height:20px;border-radius:50%;
+  transform:translateY(-50%);
+  background-color:var(--ok);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.6 4.6L19 7.4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:12px 12px;
+}
+.check-list li span{color:var(--muted);font-weight:500}
+
+.callout{
+  border:1.5px dashed rgba(0,87,250,.32);background:rgba(0,87,250,.04);
+  border-radius:var(--radius-md);padding:16px 20px;font-size:14px;color:var(--ink);font-weight:600;margin:16px 0 4px;
+}
+.callout b{color:var(--accent)}
+.callout.plain{font-weight:500;color:var(--muted)}
+
+/* ============ LICENSING-SPECIFIC ============ */
+
+/* overview cards */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:16px 0 8px}
+.ov-card{padding:26px;position:relative;overflow:hidden}
+.ov-card::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;border-radius:50%;pointer-events:none}
+.ov-card.ov-mit::before{background:radial-gradient(circle,rgba(10,157,108,.14),transparent 70%)}
+.ov-card.ov-cc::before{background:radial-gradient(circle,rgba(0,87,250,.14),transparent 70%)}
+.ov-badge{
+  display:inline-flex;align-items:center;font-family:var(--fm);font-weight:700;font-size:11px;
+  letter-spacing:.08em;padding:5px 11px;border-radius:8px;margin-bottom:14px;
+}
+.ov-badge.mit{background:rgba(10,157,108,.1);color:var(--ok);border:1px solid rgba(10,157,108,.25)}
+.ov-badge.cc{background:rgba(0,87,250,.08);color:var(--accent);border:1px solid var(--accent-line)}
+.ov-card h3{font-family:var(--fd);font-weight:800;font-size:19px;margin-bottom:12px;letter-spacing:-.01em}
+.ov-list{list-style:none;margin:0 0 16px}
+.ov-list li{
+  position:relative;padding:6px 0 6px 22px;font-size:14px;font-weight:600;color:var(--muted);
+}
+.ov-list li::before{
+  content:'';position:absolute;left:4px;top:50%;width:8px;height:8px;border-radius:50%;
+  transform:translateY(-50%);background:var(--accent);
+}
+.ov-card.ov-mit .ov-list li::before{background:var(--ok)}
+.ov-link{font-size:13.5px;font-weight:800;color:var(--accent);display:inline-flex;align-items:center;gap:6px;transition:gap .25s}
+.ov-link:hover{gap:11px}
+
+/* license detail card */
+.lic-card{
+  border-radius:var(--radius-md);padding:26px;border:1px solid;margin:18px 0;
+}
+.lic-card.mit{background:rgba(10,157,108,.035);border-color:rgba(10,157,108,.2)}
+.lic-card.cc{background:rgba(0,87,250,.035);border-color:var(--accent-line)}
+.lic-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.lic-head .lic-badge{
+  font-family:var(--fm);font-weight:700;font-size:12px;letter-spacing:.06em;
+  padding:6px 12px;border-radius:9px;
+}
+.lic-card.mit .lic-badge{background:var(--ok);color:#fff}
+.lic-card.cc .lic-badge{background:var(--accent);color:#fff}
+.lic-head h3{font-family:var(--fd);font-weight:800;font-size:20px;letter-spacing:-.01em}
+
+/* permissions */
+.perm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin:14px 0 4px}
+.perm{
+  display:flex;align-items:center;gap:8px;padding:9px 13px;border-radius:10px;
+  font-size:12.5px;font-weight:700;letter-spacing:.01em;
+}
+.perm svg{width:15px;height:15px;flex:none}
+.perm.yes{background:rgba(10,157,108,.08);color:var(--ok);border:1px solid rgba(10,157,108,.18)}
+.perm.no{background:rgba(229,72,77,.07);color:var(--bad);border:1px solid rgba(229,72,77,.18)}
+
+/* full text details */
+details.license-full{
+  border:1px solid var(--accent-line);border-radius:var(--radius-md);
+  background:var(--glass);margin:12px 0;overflow:hidden;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+details.license-full summary{
+  padding:16px 22px;font-family:var(--fb);font-weight:800;font-size:14.5px;
+  cursor:pointer;display:flex;align-items:center;gap:11px;list-style:none;
+  color:var(--ink);transition:color .25s;
+}
+details.license-full summary:hover{color:var(--accent)}
+details.license-full summary::-webkit-details-marker{display:none}
+details.license-full summary::after{
+  content:'+';margin-left:auto;font-size:22px;font-weight:400;color:var(--accent);
+  transition:transform .3s cubic-bezier(.2,.7,.2,1);line-height:1;
+}
+details.license-full[open] summary::after{transform:rotate(45deg)}
+details.license-full summary .sum-tag{
+  font-family:var(--fm);font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;
+}
+details.license-full summary .sum-tag.mit{background:rgba(10,157,108,.1);color:var(--ok)}
+details.license-full summary .sum-tag.cc{background:rgba(0,87,250,.08);color:var(--accent)}
+details.license-full pre{
+  padding:20px 22px;background:rgba(0,87,250,.025);border-top:1px solid var(--accent-line);
+  font-family:var(--fm);font-size:12px;line-height:1.7;color:var(--muted);
+  white-space:pre-wrap;word-break:break-word;max-height:520px;overflow-y:auto;
+  margin:0;
+}
+details.license-full pre::-webkit-scrollbar{width:8px}
+details.license-full pre::-webkit-scrollbar-track{background:transparent}
+details.license-full pre::-webkit-scrollbar-thumb{background:rgba(0,87,250,.2);border-radius:4px}
+
+/* mini note */
+.mini-note{
+  font-size:12.5px;color:var(--faint);font-weight:600;font-style:italic;margin-top:6px;
+  display:flex;gap:8px;align-items:flex-start;
+}
+.mini-note::before{content:'※';color:var(--accent);font-style:normal;flex:none}
+.mini-note a{font-weight:800;text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(0,87,250,.35)}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--accent-line);background:linear-gradient(180deg,#ffffff,#f4f8ff);position:relative;z-index:2;margin-top:60px}
+.ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px;padding:64px 0 44px}
+.ft-brand p{color:var(--muted);font-size:14px;font-weight:500;margin:16px 0 20px;max-width:280px}
+.ft-col h5{font-family:var(--fm);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);margin-bottom:18px}
+.ft-col a{display:block;color:var(--ink);font-size:14px;font-weight:700;margin-bottom:11px;text-decoration:none;transition:color .25s,transform .25s}
+.ft-col a:hover{color:var(--accent);transform:translateX(4px)}
+.ft-mid{padding:22px 0;border-top:1px dashed rgba(0,87,250,.18);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.ft-mid span{font-size:13.5px;color:var(--muted);font-weight:600}
+.ft-mid .heart{color:var(--bad);display:inline-block;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.25)}24%{transform:scale(1)}}
+.license-text{
+  font-family:var(--fd);font-weight:600;font-size:10.5px;line-height:1.75;color:#9aa6b8;
+  margin:6px 0 26px;max-width:1000px;word-break:break-word;
+}
+.ft-bottom{border-top:1px solid rgba(0,87,250,.12);padding:24px 0 30px;display:flex;flex-direction:column;gap:10px}
+.ft-bottom p{font-size:12.5px;color:var(--muted);font-weight:500}
+.ft-bottom p b{color:var(--ink)}
+.ft-bottom .fine{font-size:11.5px;color:var(--faint)}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1020px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .doc-grid{grid-template-columns:1fr;gap:30px}
+  .toc{position:static;display:flex;flex-wrap:wrap;gap:8px;padding:18px}
+  .toc h4{display:none}
+  .toc a:not(.btn){padding:8px 13px}
+  .ft-top{grid-template-columns:1fr 1fr}
+  .ov-grid{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .nav-links{display:none}
+}
+@media (max-width:640px){
+  .hero{padding:140px 0 56px}
+  .doc{padding:56px 0 40px}
+  .policy-doc h2{font-size:1.1rem;gap:10px}
+  .policy-doc .pol-num{font-size:11.5px;padding:5px 9px}
+  .ft-top{grid-template-columns:1fr;gap:34px}
+  .perm-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}
+  .hline>span{transform:none;animation:none}
+  .hero-sub,.hero-actions,.glance{opacity:1;animation:none}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<div class="noise"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="hdr" id="hdr">
+  <div class="container hdr-in">
+    <a href="https://lgeoip.github.io/main/" class="logo">lgeoip</a>
+    <nav class="nav-links">
+      <a href="https://lgeoip.github.io/main/">Main info page</a>
+      <a href="https://tutuurg.github.io/lgeoip/" target="_blank" rel="noopener">Try lgeoip</a>
+      <a href="https://lgeoip.github.io/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="#sec-4">Full texts</a>
+    </nav>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1>
+        <span class="hline"><span><span class="ip-accent">Licensing</span></span></span>
+      </h1>
+      <p class="hero-sub">Everything you need to know about how the <b>lgeoip</b> and <b>lgeoAI</b> projects are licensed — the code, the models, and the brand. Clear, permissive where it matters, and honest about the rest.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#sec-1">
+          <svg class="b-ico" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          Read the overview
+        </a>
+        <a class="btn btn-ghost" href="#sec-4">Full license texts</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOCUMENT ================= -->
+<section class="doc">
+  <div class="container doc-grid">
+
+    <!-- TOC -->
+    <aside class="toc glass" aria-label="Table of contents">
+      <h4>Contents</h4>
+      <a href="#sec-1" class="active"><span class="n">01</span>Overview</a>
+      <a href="#sec-2"><span class="n">02</span>MIT License</a>
+      <a href="#sec-3"><span class="n">03</span>CC BY-NC-ND 4.0</a>
+      <a href="#sec-4"><span class="n">04</span>Full license texts</a>
+    </aside>
+
+    <!-- BODY -->
+    <div class="pol-list">
+
+      <article class="policy-doc reveal">
+
+        <h2 id="sec-1"><span class="pol-num">01</span>Overview</h2>
+        <p>The <b>lgeoip</b> and <b>lgeoAI</b> projects use two distinct licenses, each covering a different kind of asset. This separation keeps the software genuinely free to use, modify and build upon, while protecting the project's visual identity from misappropriation.</p>
+
+        <div class="ov-grid">
+          <div class="ov-card glass ov-mit">
+            <span class="ov-badge mit">MIT LICENSE</span>
+            <h3>Software &amp; models</h3>
+            <ul class="ov-list">
+              <li>lgeoip source code</li>
+              <li>lgeoip modules &amp; scripts</li>
+              <li>lgeoAI models</li>
+              <li>lgeoAI modules</li>
+            </ul>
+            <a href="#sec-2" class="ov-link">Read MIT terms →</a>
+          </div>
+          <div class="ov-card glass ov-cc">
+            <span class="ov-badge cc">CC BY-NC-ND 4.0</span>
+            <h3>Logos &amp; branding</h3>
+            <ul class="ov-list">
+              <li>lgeoip logo</li>
+              <li>lgeoAI logo</li>
+            </ul>
+            <a href="#sec-3" class="ov-link">Read CC terms →</a>
+          </div>
+        </div>
+
+        <div class="callout">In short: <b>use the code freely</b>, but <b>don't claim our logos</b>. The two licenses never overlap — they cover different things.</div>
+        <p class="mini-note">The CC BY-NC-ND 4.0 license applies solely to the logo images. It does not grant any rights to access, use, or replicate the server-side functionality of lgeoip or lgeoAI.</p>
+
+        <h2 id="sec-2"><span class="pol-num">02</span>MIT License — code &amp; models</h2>
+        <p>The <b>MIT License</b> is one of the most permissive open-source licenses available. It applies to the <b>lgeoip source code</b>, <b>all of its modules</b>, the <b>lgeoAI models</b>, and <b>all of their modules</b>.</p>
+
+        <div class="lic-card mit">
+          <div class="lic-head">
+            <span class="lic-badge">MIT</span>
+            <h3>What you can do</h3>
+          </div>
+          <div class="perm-grid">
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Use</div>
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Copy</div>
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Modify</div>
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Merge</div>
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Publish</div>
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Distribute</div>
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Sublicense</div>
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Sell</div>
+          </div>
+        </div>
+
+        <div class="lic-card mit">
+          <div class="lic-head">
+            <span class="lic-badge">MIT</span>
+            <h3>The only condition</h3>
+          </div>
+          <p style="margin-bottom:10px">If you distribute copies or substantial portions of the software, you must:</p>
+          <ul class="check-list">
+            <li>Include the <b>original copyright notice</b> and this <b>permission notice</b> in all copies or substantial portions of the software.</li>
+            <li>Not remove or alter the license text in redistributions.</li>
+          </ul>
+        </div>
+
+        <div class="callout">No warranty. The software is provided <b>"as is"</b>, without warranty of any kind — express or implied. The authors are not liable for any damages arising from its use.</div>
+
+        <h3>Copyright holder</h3>
+        <p>Copyright © 2026 <b>Cookie:3 (tutuurg)</b> — <a href="https://github.com/tutuurg" target="_blank" rel="noopener">github.com/tutuurg</a>.</p>
+
+        <h2 id="sec-3"><span class="pol-num">03</span>CC BY-NC-ND 4.0 — logos &amp; branding</h2>
+        <p>The <b>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</b> license applies to the <b>lgeoip logo</b> and the <b>lgeoAI logo</b>. It does <b>not</b> apply to the code or models — those are MIT.</p>
+
+        <div class="lic-card cc">
+          <div class="lic-head">
+            <span class="lic-badge">CC BY-NC-ND 4.0</span>
+            <h3>What you can do</h3>
+          </div>
+          <div class="perm-grid">
+            <div class="perm yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.6 4.6L19 7.4"/></svg>Share</div>
+            <div class="perm no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Commercial use</div>
+            <div class="perm no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Modify</div>
+            <div class="perm no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Create derivatives</div>
+          </div>
+        </div>
+
+        <div class="lic-card cc">
+          <div class="lic-head">
+            <span class="lic-badge">CC BY-NC-ND 4.0</span>
+            <h3>Your obligations</h3>
+          </div>
+          <ul class="check-list">
+            <li><b>Attribution</b> <span>— credit the creator and the license when sharing.</span></li>
+            <li><b>NonCommercial</b> <span>— no commercial advantage or monetary compensation.</span></li>
+            <li><b>NoDerivatives</b> <span>— no remixing, transforming, or building upon the logos.</span></li>
+            <li><b>Link to the license</b> <span>— include a URI or link to the full legal code.</span></li>
+          </ul>
+        </div>
+
+        <div class="callout plain">The CC license covers <b>only</b> the logo images. It grants no rights to the server-side logic, data, or functionality of lgeoip or lgeoAI.</div>
+
+        <h3>Attribution example</h3>
+        <p>When sharing a logo under this license, a reasonable attribution could be:</p>
+        <p><span class="mono">"lgeoip logo" © 2026 Cookie:3 (tutuurg), licensed under CC BY-NC-ND 4.0</span></p>
+        <p>Link to the license: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">creativecommons.org/licenses/by-nc-nd/4.0</a>.</p>
+
+        <h2 id="sec-4"><span class="pol-num">04</span>Full license texts</h2>
+        <p>The canonical, complete texts of both licenses are reproduced below for reference. The MIT license applies to all code and models; the CC BY-NC-ND 4.0 license applies to the logos.</p>
+
+        <details class="license-full">
+          <summary>
+            <span class="sum-tag mit">MIT</span>
+            MIT License — full text
+          </summary>
+<pre>MIT License
+
+Copyright (c) 2026 Cookie:3 (tutuurg) (https://github.com/tutuurg)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</pre>
+        </details>
+
+        <details class="license-full">
+          <summary>
+            <span class="sum-tag cc">CC BY-NC-ND 4.0</span>
+            Creative Commons BY-NC-ND 4.0 — full legal code
+          </summary>
+<pre>Attribution-NonCommercial-NoDerivatives 4.0 International
+
+=======================================================================
+
+Creative Commons Corporation ("Creative Commons") is not a law firm and
+does not provide legal services or legal advice. Distribution of
+Creative Commons public licenses does not create a lawyer-client or
+other relationship. Creative Commons makes its licenses and related
+information available on an "as-is" basis. Creative Commons gives no
+warranties regarding its licenses, any material licensed under their
+terms and conditions, or any related information. Creative Commons
+disclaims all liability for damages resulting from their use to the
+fullest extent possible.
+
+=======================================================================
+
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+International Public License
+
+By exercising the Licensed Rights (defined below), You accept and agree
+to be bound by the terms and conditions of this Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International Public
+License ("Public License"). To the extent this Public License may be
+interpreted as a contract, You are granted the Licensed Rights in
+consideration of Your acceptance of these terms and conditions, and the
+Licensor grants You such rights in consideration of benefits the
+Licensor receives from making the Licensed Material available under
+these terms and conditions.
+
+
+Section 1 -- Definitions.
+
+  a. Adapted Material means material subject to Copyright and Similar
+     Rights that is derived from or based upon the Licensed Material
+     and in which the Licensed Material is translated, altered,
+     arranged, transformed, or otherwise modified in a manner requiring
+     permission under the Copyright and Similar Rights held by the
+     Licensor. For purposes of this Public License, where the Licensed
+     Material is a musical work, performance, or sound recording,
+     Adapted Material is always produced where the Licensed Material is
+     synched in timed relation with a moving image.
+
+  b. Copyright and Similar Rights means copyright and/or similar rights
+     closely related to copyright including, without limitation,
+     performance, broadcast, sound recording, and Sui Generis Database
+     Rights, without regard to how the rights are labeled or
+     categorized. For purposes of this Public License, the rights
+     specified in Section 2(b)(1)-(2) are not Copyright and Similar
+     Rights.
+
+  c. Effective Technological Measures means those measures that, in the
+     absence of proper authority, may not be circumvented under laws
+     fulfilling obligations under Article 11 of the WIPO Copyright
+     Treaty adopted on December 20, 1996, and/or similar international
+     agreements.
+
+  d. Exceptions and Limitations means fair use, fair dealing, and/or
+     any other exception or limitation to Copyright and Similar Rights
+     that applies to Your use of the Licensed Material.
+
+  e. Licensed Material means the artistic or literary work, database,
+     or other material to which the Licensor applied this Public
+     License.
+
+  f. Licensed Rights means the rights granted to You subject to the
+     terms and conditions of this Public License, which are limited to
+     all Copyright and Similar Rights that apply to Your use of the
+     Licensed Material and that the Licensor has authority to license.
+
+  g. Licensor means the individual(s) or entity(ies) granting rights
+     under this Public License.
+
+  h. NonCommercial means not primarily intended for or directed towards
+     commercial advantage or monetary compensation. For purposes of
+     this Public License, the exchange of the Licensed Material for
+     other material subject to Copyright and Similar Rights by digital
+     file-sharing or similar means is NonCommercial provided there is
+     no payment of monetary compensation in connection with the
+     exchange.
+
+  i. Share means to provide material to the public by any means or
+     process that requires permission under the Licensed Rights, such
+     as reproduction, public display, public performance, distribution,
+     dissemination, communication, or importation, and to make material
+     available to the public including in ways that members of the
+     public may access the material from a place and at a time
+     individually chosen by them.
+
+  j. Sui Generis Database Rights means rights other than copyright
+     resulting from Directive 96/9/EC of the European Parliament and of
+     the Council of 11 March 1996 on the legal protection of databases,
+     as amended and/or succeeded, as well as other essentially
+     equivalent rights anywhere in the world.
+
+  k. You means the individual or entity exercising the Licensed Rights
+     under this Public License. Your has a corresponding meaning.
+
+
+Section 2 -- Scope.
+
+  a. License grant.
+
+       1. Subject to the terms and conditions of this Public License,
+          the Licensor hereby grants You a worldwide, royalty-free,
+          non-sublicensable, non-exclusive, irrevocable license to
+          exercise the Licensed Rights in the Licensed Material to:
+
+            a. reproduce and Share the Licensed Material, in whole or
+               in part, for NonCommercial purposes only; and
+
+            b. produce and reproduce, but not Share, Adapted Material
+               for NonCommercial purposes only.
+
+       2. Exceptions and Limitations. For the avoidance of doubt, where
+          Exceptions and Limitations apply to Your use, this Public
+          License does not apply, and You do not need to comply with
+          its terms and conditions.
+
+       3. Term. The term of this Public License is specified in Section
+          6(a).
+
+       4. Media and formats; technical modifications allowed. The
+          Licensor authorizes You to exercise the Licensed Rights in
+          all media and formats whether now known or hereafter created,
+          and to make technical modifications necessary to do so. The
+          Licensor waives and/or agrees not to assert any right or
+          authority to forbid You from making technical modifications
+          necessary to exercise the Licensed Rights, including
+          technical modifications necessary to circumvent Effective
+          Technological Measures. For purposes of this Public License,
+          simply making modifications authorized by this Section 2(a)
+          (4) never produces Adapted Material.
+
+       5. Downstream recipients.
+
+            a. Offer from the Licensor -- Licensed Material. Every
+               recipient of the Licensed Material automatically
+               receives an offer from the Licensor to exercise the
+               Licensed Rights under the terms and conditions of this
+               Public License.
+
+            b. No downstream restrictions. You may not offer or impose
+               any additional or different terms or conditions on, or
+               apply any Effective Technological Measures to, the
+               Licensed Material if doing so restricts exercise of the
+               Licensed Rights by any recipient of the Licensed
+               Material.
+
+       6. No endorsement. Nothing in this Public License constitutes or
+          may be construed as permission to assert or imply that You
+          are, or that Your use of the Licensed Material is, connected
+          with, or sponsored, endorsed, or granted official status by,
+          the Licensor or others designated to receive attribution as
+          provided in Section 3(a)(1)(A)(i).
+
+  b. Other rights.
+
+       1. Moral rights, such as the right of integrity, are not
+          licensed under this Public License, nor are publicity,
+          privacy, and/or other similar personality rights; however, to
+          the extent possible, the Licensor waives and/or agrees not to
+          assert any such rights held by the Licensor to the limited
+          extent necessary to allow You to exercise the Licensed
+          Rights, but not otherwise.
+
+       2. Patent and trademark rights are not licensed under this
+          Public License.
+
+       3. To the extent possible, the Licensor waives any right to
+          collect royalties from You for the exercise of the Licensed
+          Rights, whether directly or through a collecting society
+          under any voluntary or waivable statutory or compulsory
+          licensing scheme. In all other cases the Licensor expressly
+          reserves any right to collect such royalties, including when
+          the Licensed Material is used other than for NonCommercial
+          purposes.
+
+
+Section 3 -- License Conditions.
+
+Your exercise of the Licensed Rights is expressly made subject to the
+following conditions.
+
+  a. Attribution.
+
+       1. If You Share the Licensed Material, You must:
+
+            a. retain the following if it is supplied by the Licensor
+               with the Licensed Material:
+
+                 i. identification of the creator(s) of the Licensed
+                    Material and any others designated to receive
+                    attribution, in any reasonable manner requested by
+                    the Licensor (including by pseudonym if
+                    designated);
+
+                ii. a copyright notice;
+
+               iii. a notice that refers to this Public License;
+
+                iv. a notice that refers to the disclaimer of
+                    warranties;
+
+                 v. a URI or hyperlink to the Licensed Material to the
+                    extent reasonably practicable;
+
+            b. indicate if You modified the Licensed Material and
+               retain an indication of any previous modifications; and
+
+            c. indicate the Licensed Material is licensed under this
+               Public License, and include the text of, or the URI or
+               hyperlink to, this Public License.
+
+          For the avoidance of doubt, You do not have permission under
+          this Public License to Share Adapted Material.
+
+       2. You may satisfy the conditions in Section 3(a)(1) in any
+          reasonable manner based on the medium, means, and context in
+          which You Share the Licensed Material. For example, it may be
+          reasonable to satisfy the conditions by providing a URI or
+          hyperlink to a resource that includes the required
+          information.
+
+       3. If requested by the Licensor, You must remove any of the
+          information required by Section 3(a)(1)(A) to the extent
+          reasonably practicable.
+
+
+Section 4 -- Sui Generis Database Rights.
+
+Where the Licensed Rights include Sui Generis Database Rights that
+apply to Your use of the Licensed Material:
+
+  a. for the avoidance of doubt, Section 2(a)(1) grants You the right
+     to extract, reuse, reproduce, and Share all or a substantial
+     portion of the contents of the database for NonCommercial purposes
+     only and provided You do not Share Adapted Material;
+
+  b. if You include all or a substantial portion of the database
+     contents in a database in which You have Sui Generis Database
+     Rights, then the database in which You have Sui Generis Database
+     Rights (but not its individual contents) is Adapted Material; and
+
+  c. You must comply with the conditions in Section 3(a) if You Share
+     all or a substantial portion of the contents of the database.
+
+For the avoidance of doubt, this Section 4 supplements and does not
+replace Your obligations under this Public License where the Licensed
+Rights include other Copyright and Similar Rights.
+
+
+Section 5 -- Disclaimer of Warranties and Limitation of Liability.
+
+  a. UNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE
+     EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS
+     AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF
+     ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS,
+     IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION,
+     WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR
+     PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS,
+     ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT
+     KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT
+     ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.
+
+  b. TO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE
+     TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION,
+     NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT,
+     INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES,
+     COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR
+     USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN
+     ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR
+     DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR
+     IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.
+
+  c. The disclaimer of warranties and limitation of liability provided
+     above shall be interpreted in a manner that, to the extent
+     possible, most closely approximates an absolute disclaimer and
+     waiver of all liability.
+
+
+Section 6 -- Term and Termination.
+
+  a. This Public License applies for the term of the Copyright and
+     Similar Rights licensed here. However, if You fail to comply with
+     this Public License, then Your rights under this Public License
+     terminate automatically.
+
+  b. Where Your right to use the Licensed Material has terminated under
+     Section 6(a), it reinstates:
+
+       1. automatically as of the date the violation is cured, provided
+          it is cured within 30 days of Your discovery of the
+          violation; or
+
+       2. upon express reinstatement by the Licensor.
+
+     For the avoidance of doubt, this Section 6(b) does not affect any
+     right the Licensor may have to seek remedies for Your violations
+     of this Public License.
+
+  c. For the avoidance of doubt, the Licensor may also offer the
+     Licensed Material under separate terms or conditions or stop
+     distributing the Licensed Material at any time; however, doing so
+     will not terminate this Public License.
+
+  d. Sections 1, 5, 6, 7, and 8 survive termination of this Public
+     License.
+
+
+Section 7 -- Other Terms and Conditions.
+
+  a. The Licensor shall not be bound by any additional or different
+     terms or conditions communicated by You unless expressly agreed.
+
+  b. Any arrangements, understandings, or agreements regarding the
+     Licensed Material not stated herein are separate from and
+     independent of the terms and conditions of this Public License.
+
+
+Section 8 -- Interpretation.
+
+  a. For the avoidance of doubt, this Public License does not, and
+     shall not be interpreted to, reduce, limit, restrict, or impose
+     conditions on any use of the Licensed Material that could lawfully
+     be made without permission under this Public License.
+
+  b. To the extent possible, if any provision of this Public License is
+     deemed unenforceable, it shall be automatically reformed to the
+     minimum extent necessary to make it enforceable. If the provision
+     cannot be reformed, it shall be severed from this Public License
+     without affecting the enforceability of the remaining terms and
+     conditions.
+
+  c. No term or condition of this Public License will be waived and no
+     failure to comply consented to unless expressly agreed to by the
+     Licensor.
+
+  d. Nothing in this Public License constitutes or may be interpreted
+     as a limitation upon, or waiver of, any privileges and immunities
+     that apply to the Licensor or You, including from the legal
+     processes of any jurisdiction or authority.
+
+=======================================================================
+
+Creative Commons is not a party to its public
+licenses. Notwithstanding, Creative Commons may elect to apply one of
+its public licenses to material it publishes and in those instances
+will be considered the "Licensor." The text of the Creative Commons
+public licenses is dedicated to the public domain under the CC0 Public
+Domain Dedication. Except for the limited purpose of indicating that
+material is shared under a Creative Commons public license or as
+otherwise permitted by the Creative Commons policies published at
+creativecommons.org/policies, Creative Commons does not authorize the
+use of the trademark "Creative Commons" or any other trademark or logo
+of Creative Commons without its prior written consent including,
+without limitation, in connection with any unauthorized modifications
+to any of its public licenses or any other arrangements,
+understandings, or agreements concerning use of licensed material. For
+the avoidance of doubt, this paragraph does not form part of the
+public licenses.
+
+Creative Commons may be contacted at creativecommons.org.</pre>
+        </details>
+
+        <p class="mini-note">These texts are reproduced for convenience. In case of any discrepancy, the canonical versions prevail: <a href="https://github.com/tutuurg/lgeoip/blob/main/LICENSE.txt" target="_blank" rel="noopener">MIT License</a> and <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>.</p>
+
+      </article>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="https://lgeoip.github.io/main/" class="logo">lgeoip</a>
+        <p>Unmask your traffic. See beyond the IP address.</p>
+        <a class="btn btn-primary btn-sm" href="https://tutuurg.github.io/lgeoip/" target="_blank" rel="noopener">Try lgeoip</a>
+      </div>
+      <div class="ft-col">
+        <h5>Project</h5>
+        <a href="https://lgeoip.github.io/main/">Main info page</a>
+        <a href="https://tutuurg.github.io/lgeoip/" target="_blank" rel="noopener">Live service</a>
+        <a href="https://lgeoip.github.io/ai" target="_blank" rel="noopener">✦lgeoAI</a>
+      </div>
+      <div class="ft-col">
+        <h5>Trust</h5>
+        <a href="https://lgeoip.github.io/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+        <a href="#top">Licensing</a>
+      </div>
+      <div class="ft-col">
+        <h5>Contact</h5>
+        <a href="https://t.me/tutuurg" target="_blank" rel="noopener">Telegram · @tutuurg</a>
+        <a href="mailto:lgeoip@inbox.ru">lgeoip@inbox.ru</a>
+        <a href="https://github.com/tutuurg" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="ft-mid">
+      <span>Non-commercial project · Made with love and curiosity <span class="heart">❤︎</span> by <a href="https://t.me/tutuurg" target="_blank" rel="noopener"><b>tutuurg</b></a>.</span>
+      <span style="font-family:var(--fm);font-size:11px;letter-spacing:.18em;color:var(--faint)">MIT LICENSE · EST. 2026</span>
+    </div>
+
+    <p class="license-text">
+      MIT License. Copyright (c) 2026 Cookie:3 (tutuurg). Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br><br>
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    </p>
+
+    <div class="ft-bottom">
+      <p>© lgeoip 2026. lgeoip uses public databases. <a href="mailto:lgeoip@inbox.ru"><b>lgeoip@inbox.ru</b></a></p>
+      <p>lgeoip logo* is licensed under <b>CC BY-NC-ND 4.0</b>. To view a copy of this license, <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener"><b>Click Here</b></a>.</p>
+      <p>lgeoAI logo* is licensed under <b>CC BY-NC-ND 4.0</b>. To view a copy of this license, <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener"><b>Click Here</b></a>.</p>
+      <p class="fine">*The CC license applies solely to the logo images and does not grant any rights to access, use, or replicate the server-side functionality of lgeoip or lgeoAI.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- header + reading progress ---------- */
+  var hdr = document.getElementById('hdr');
+  var progress = document.getElementById('progress');
+  function onScroll(){
+    hdr.classList.toggle('scrolled', window.scrollY > 24);
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var p = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = p + '%';
+  }
+
+  /* ---------- reveal ---------- */
+  var revEls = document.querySelectorAll('.reveal');
+  if (REDUCED || !('IntersectionObserver' in window)) {
+    revEls.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
+    revEls.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- TOC scrollspy ---------- */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a[href^="#sec-"]'));
+  var sections = tocLinks
+    .map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); })
+    .filter(Boolean);
+
+  var SPY_OFFSET = 140;
+  var LOCK_MS = 1000;
+  var lockUntil = 0;
+
+  function setActive(id){
+    tocLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  function updateSpy(){
+    if (!sections.length) return;
+    if (Date.now() < lockUntil) return;
+
+    var doc = document.documentElement;
+    var atBottom = (window.innerHeight + window.scrollY) >= (doc.scrollHeight - 2);
+    var currentId;
+
+    if (atBottom) {
+      currentId = sections[sections.length - 1].id;
+    } else {
+      var scrollPos = window.scrollY + SPY_OFFSET;
+      currentId = sections[0].id;
+      for (var i = 0; i < sections.length; i++){
+        var top = sections[i].getBoundingClientRect().top + window.scrollY;
+        if (top <= scrollPos) { currentId = sections[i].id; }
+        else { break; }
+      }
+    }
+    setActive(currentId);
+  }
+
+  function onAnyScroll(){ onScroll(); updateSpy(); }
+  window.addEventListener('scroll', onAnyScroll, {passive:true});
+  window.addEventListener('resize', onAnyScroll);
+
+  tocLinks.forEach(function(a){
+    a.addEventListener('click', function(){
+      var id = a.getAttribute('href').slice(1);
+      setActive(id);
+      lockUntil = Date.now() + LOCK_MS;
+      window.setTimeout(updateSpy, LOCK_MS + 50);
+    });
+  });
+
+  onScroll();
+  updateSpy();
+})();
+</script>
+</body>
+</html>
